@@ -13,5 +13,6 @@ Shen Yichen (A0091173J)
   - `mod_rewrite` needs to be activated
  - MySQL 5.6
 
- ## Frameworks
- This app is based on the [MINI](https://github.com/panique/mini) PHP framework, and adopts MVC principles approximately.
+## Frameworks
+
+This app is based on the [MINI](https://github.com/panique/mini) PHP framework, and adopts MVC principles approximately.
