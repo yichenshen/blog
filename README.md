@@ -16,3 +16,16 @@ Shen Yichen (A0091173J)
 ## Frameworks
 
 This app is based on the [MINI](https://github.com/panique/mini) PHP framework, and adopts MVC principles approximately.
+
+## Setup
+
+#### MySQL
+
+MySQL user configs are located in `src/application/config/config.php`. Edit them accordingly to connect to your MySQL database.
+
+Alternatively, for a local MySQL server, create a user with the following credentials, which will allow connection with default settings.
+
+```
+user: 		blog
+password: 	cvwoblog
+```
