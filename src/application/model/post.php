@@ -73,6 +73,6 @@ class Post extends Model{
     function delete($id){
     	$sql = "DELETE FROM post WHERE post_id = :id";
     	$query = $this->db->prepare($sql);
-    	$parameters = array(':id' =>)
+    	$parameters = array(':id' => $id);
     }
 }
