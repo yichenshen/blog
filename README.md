@@ -21,6 +21,24 @@ This app is based on the [MINI](https://github.com/panique/mini) PHP framework, 
 
 #### MySQL
 
+##### Schema
+
+Install the schema by running `db/schema_install.sql`. 
+
+```bash
+# From system terminal 
+mysql -u root -p < db/schema_install.sql
+
+# OR
+
+# From MySQL terminal
+source db/schema_install.sql
+```
+
+This scripts creates the __blog__ schema in MySQL and sets up the tables accordingly. No data will be loaded.
+
+##### Connector
+
 MySQL user configs are located in `src/application/config/config.php`. Edit them accordingly to connect to your MySQL database.
 
 Alternatively, for a local MySQL server, create a user with the following credentials, which will allow connection with default settings.
