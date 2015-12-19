@@ -1,3 +1,4 @@
+<main>
 <div class="container">
 	<?php foreach ($posts as $post): ?>
 		<h1>
@@ -6,5 +7,5 @@
 		
 		<?php if (isset($post->content)) echo htmlspecialchars($post->content, ENT_QUOTES, 'UTF-8'); ?>
 	<?php endforeach; ?>
-
 </div>
+</main>

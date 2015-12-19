@@ -17,15 +17,19 @@
     <link href="<?php echo URL; ?>css/style.css" rel="stylesheet">
 </head>
 <body>
-    <!-- logo -->
-    <div class="logo">
-        MINI
-    </div>
-
-    <!-- navigation -->
-    <div class="navigation">
-        <a href="<?php echo URL; ?>">home</a>
-        <a href="<?php echo URL; ?>home/exampleone">subpage</a>
-        <a href="<?php echo URL; ?>home/exampletwo">subpage 2</a>
-        <a href="<?php echo URL; ?>songs">songs</a>
-    </div>
+    <header class="navbar navbar-fixed-top navbar-inverse container-fluid">
+        <div class="container">
+        
+            <!-- Logo -->
+            <div class="navbar-header">
+                <a href="<?php echo URL?>" id="logo">blog</a>
+            </div>
+        
+            <!-- Bar to the right -->
+            <nav>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Log in</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
