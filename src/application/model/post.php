@@ -12,7 +12,7 @@ class Post extends Model{
 	 * Returns all the posts objects
 	 */
 	function all() {
-        $sql = "SELECT * FROM post";
+        $sql = "SELECT * FROM post ORDER BY create_time DESC";
         $query = $this->db->prepare($sql);
         $query->execute();
 
