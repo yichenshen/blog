@@ -17,16 +17,45 @@ class Posts extends Controller {
     }
 
     /**
-     * PAGE: index
-     * 
+     * PAGE: page 1
+     * A method wrapper to the first page of the blog
      */
     public function index() {
+        $this->page(1);
+    }
+
+    //TODO add paging
+
+    /**
+     * PAGE: posts display page
+     * Display a page of blog posts.
+     *
+     * Can be accessed by anyone
+     *
+     * @param   int     $page   The page number to display
+     */
+    public function page($page) {
         $posts = $this->model->all();
 
-        // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/posts/index.php';
         require APP . 'view/_templates/footer.php';
+    }
+
+    /**
+     * PAGE: Posts admin page
+     * Displays the admin page, or the dashboard
+     *
+     * Requires login.
+     *
+     * @param   int     $page   The page number to display
+     */
+    public function admin($page) {
+        $posts = $this->model->all();
+        
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/posts/admin.php';
+        require APP . 'view/_templates/footer.php';   
     }
 
 }

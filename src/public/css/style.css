@@ -18,3 +18,11 @@ body {
     text-decoration: none;
     color: #fff;
 }
+
+.delete-button{
+    display: inline;
+}
+
+.table-link{
+    display: block;
+}
