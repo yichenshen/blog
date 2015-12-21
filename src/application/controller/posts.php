@@ -58,4 +58,12 @@ class Posts extends Controller {
         require APP . 'view/_templates/footer.php';   
     }
 
+    public function show($id){
+        $post = $this->model->get($id);
+
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/posts/show.php';
+        require APP . 'view/_templates/footer.php';      
+    }
+
 }
