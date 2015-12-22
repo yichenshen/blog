@@ -66,4 +66,17 @@ class Posts extends Controller {
         require APP . 'view/_templates/footer.php';      
     }
 
+    public function newpost(){
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/posts/new.php';
+        require APP . 'view/_templates/footer.php';  
+    }
+
+    public function create(){
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+
+        $this->model->create($title, $content);
+    }
+
 }

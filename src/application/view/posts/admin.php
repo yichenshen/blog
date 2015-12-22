@@ -11,7 +11,7 @@
         <th>Title</th>
         <th>Text</th>
         <th colspan="3">
-          <a href = "<?php echo URL ?>posts/new" class = "btn btn-primary pull-right">New Article</a>
+          <a href = "<?php echo URL ?>posts/newpost" class = "btn btn-primary pull-right">New Article</a>
         </th>
       </tr>
     </thead>
