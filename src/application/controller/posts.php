@@ -77,6 +77,8 @@ class Posts extends Controller {
         $content = $_POST['content'];
 
         $this->model->create($title, $content);
+
+        header("Location: ". URL . "posts");
     }
 
     public function edit($id){
