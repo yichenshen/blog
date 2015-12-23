@@ -2,7 +2,7 @@
 
 /**
  * Class Post
- * The controller for post objects. Provides methods to list, create, edit and delete blog posts.
+ * The model for blog posts. Allows for insertion, updating, deletion and querying of blog posts from the database.
  *
  */
 

@@ -58,6 +58,16 @@ class Posts extends Controller {
         require APP . 'view/_templates/footer.php';   
     }
 
+    /**
+     * PAGE: Blog post show page
+     * Displays the blog post on it's own.
+     * 
+     * Does not require login.
+     * 
+     * Comments should be handled from this page.
+     * 
+     * @param   int     $id     The ID of the post to show.
+     */
     public function show($id){
         $post = $this->model->get($id);
 
@@ -66,12 +76,26 @@ class Posts extends Controller {
         require APP . 'view/_templates/footer.php';      
     }
 
+    /**
+     * PAGE: New post creation page.
+     * The page that allows writers to create a new blog post.
+     * 
+     * Requires login.
+     */
     public function newpost(){
         require APP . 'view/_templates/header.php';
         require APP . 'view/posts/new.php';
         require APP . 'view/_templates/footer.php';  
     }
 
+    /**
+     * POST: Blog post creation function.
+     * The POST URL that directs a creation of a post tuple in the database.
+     * 
+     * TODO: Check that the data supplied is valid.
+     *  
+     * Requires login.
+     */
     public function create(){
         $title = $_POST['title'];
         $content = $_POST['content'];
@@ -81,6 +105,14 @@ class Posts extends Controller {
         header("Location: ". URL . "posts");
     }
 
+    /**
+     * PAGE: The edit posts page.
+     * Page where the post details are retrieved from the database, then displayed in a form to allow for edits.
+     * 
+     * Requires login.
+     * 
+     * @param   int     $id     The ID of the post to edit.
+     */
     public function edit($id){
         $post = $this->model->get($id);
 
@@ -89,6 +121,14 @@ class Posts extends Controller {
         require APP . 'view/_templates/footer.php';  
     }
 
+    /**
+     * POST: Blog post editing function.
+     * The POST function to update the blog post in the database.
+     * 
+     * Requires login.
+     * 
+     * @param   int     $id     The ID of the post to edit.
+     */
     public function update($id){
         $title = $_POST['title'];
         $content = $_POST['content'];
@@ -98,6 +138,14 @@ class Posts extends Controller {
         header("Location: ". URL . "posts/show/" . $id);
     }
 
+    /**
+     * POST: Blog post deletion function.
+     * The POST function to delete te blog post tuple from the database.
+     * 
+     * Requires login.
+     *
+     * @param   int     $id     The ID of the post to delete.
+     */
     public function delete($id){
         $this->model->delete($id);
 
