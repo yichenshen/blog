@@ -79,4 +79,20 @@ class Posts extends Controller {
         $this->model->create($title, $content);
     }
 
+    public function edit($id){
+        $post = $this->model->get($id);
+
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/posts/edit.php';
+        require APP . 'view/_templates/footer.php';  
+    }
+
+    public function update($id){
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+
+        $this->model->edit($id, $title, $content);
+
+        header("Location: ". URL . "posts/show/" . $id);
+    }
 }
