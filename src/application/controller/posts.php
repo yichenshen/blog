@@ -97,4 +97,10 @@ class Posts extends Controller {
 
         header("Location: ". URL . "posts/show/" . $id);
     }
+
+    public function delete($id){
+        $this->model->delete($id);
+
+        header("Location: " . URL . "posts/");
+    }
 }

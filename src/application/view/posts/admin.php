@@ -39,7 +39,7 @@
                             <span class="sr-only">Edit</span>
                         </a>
                         |
-                        <form action = "posts/delete/<?php echo $post->post_id;?>" method = "POST" class = "delete-button">
+                        <form action = "<?php echo URL . "posts/delete/". $post->post_id; ?>" method = "POST" class = "delete-button">
                             <!-- Confirm delete dialog -->
                             <a  href = "#" 
                                 onclick="if(confirm(&quot;Are you sure you want to delete this post?&quot;)) this.parentNode.submit()">

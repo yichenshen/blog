@@ -74,5 +74,7 @@ class Post extends Model{
     	$sql = "DELETE FROM post WHERE post_id = :id";
     	$query = $this->db->prepare($sql);
     	$parameters = array(':id' => $id);
+
+        $query->execute($parameters);
     }
 }
