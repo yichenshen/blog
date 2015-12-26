@@ -22,13 +22,13 @@
         
             <!-- Logo -->
             <div class="navbar-header">
-                <a href="<?php echo URL?>" id="logo">blog</a>
+                <a href="<?php echo URL; ?>" id="logo">blog</a>
             </div>
         
             <!-- Bar to the right -->
             <nav>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Log in</a></li>
+                    <li><a href="<?php echo URL; ?>login">Log in</a></li>
                 </ul>
             </nav>
         </div>
