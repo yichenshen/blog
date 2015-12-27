@@ -21,4 +21,15 @@ class Login extends Controller {
         require APP . 'view/login/index.php';
         require APP . 'view/_templates/footer.php';  	
     }
+
+    public function auth(){
+    	$user = $_POST["username"];
+        $pass = $_POST["password"];
+
+        if($this->model->authenticate($user, $pass)){
+
+        } else{
+
+        }
+    }
 }
