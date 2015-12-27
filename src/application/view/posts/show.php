@@ -20,8 +20,10 @@
 <br />
 <div class="container">
 	<div class = "pull-right">
-	<a href="<?php echo URL . "posts/edit/" . $post->post_id; ?>">Edit</a>
-	|
+	<?php if(isset($_SESSION['user'])): ?>
+		<a href="<?php echo URL . "posts/edit/" . $post->post_id; ?>">Edit</a>
+		|
+	<?php endif; ?>
 	<a href="<?php echo URL; ?>">Back</a>
 	</div>
 </div>

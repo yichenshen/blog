@@ -28,7 +28,13 @@
             <!-- Bar to the right -->
             <nav>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="<?php echo URL; ?>login">Log in</a></li>
+                    <?php if(isset($_SESSION['user'])): ?>
+                        <li><a href="<?php echo URL; ?>posts/admin/1">Dashboard</a></li>
+                        <li><a href="<?php echo URL; ?>login/logout">Log Out</a></li>
+                    <?php else: ?>
+                        <li><a href="<?php echo URL; ?>login">Log in</a></li>
+                    <?php endif; ?>
+
                 </ul>
             </nav>
         </div>
