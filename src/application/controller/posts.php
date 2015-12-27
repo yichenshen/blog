@@ -57,6 +57,8 @@ class Posts extends Controller {
             require APP . 'view/_templates/header.php';
             require APP . 'view/posts/admin.php';
             require APP . 'view/_templates/footer.php';   
+        } else{
+            header('Location: ' . URL . 'error/unauthorized');
         }
     }
 
@@ -89,6 +91,8 @@ class Posts extends Controller {
             require APP . 'view/_templates/header.php';
             require APP . 'view/posts/new.php';
             require APP . 'view/_templates/footer.php';  
+        } else{
+            header('Location: ' . URL . 'error/unauthorized');
         }
     }
 
@@ -108,6 +112,8 @@ class Posts extends Controller {
             $this->model->create($title, $content);
 
             header("Location: ". URL . "posts");
+        } else{
+            header('Location: ' . URL . 'error/unauthorized');
         }
     }
 
@@ -126,6 +132,8 @@ class Posts extends Controller {
             require APP . 'view/_templates/header.php';
             require APP . 'view/posts/edit.php';
             require APP . 'view/_templates/footer.php';  
+        } else{
+            header('Location: ' . URL . 'error/unauthorized');
         }
     }
 
@@ -145,6 +153,8 @@ class Posts extends Controller {
             $this->model->edit($id, $title, $content);
 
             header("Location: ". URL . "posts/show/" . $id);
+        } else{
+            header('Location: ' . URL . 'error/unauthorized');
         }
     }
 
@@ -161,6 +171,8 @@ class Posts extends Controller {
             $this->model->delete($id);
 
             header("Location: " . URL . "posts/");
+        } else{
+            header('Location: ' . URL . 'error/unauthorized');
         }
     }
 }
