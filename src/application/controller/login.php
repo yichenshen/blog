@@ -41,4 +41,12 @@ class Login extends Controller {
             require APP . 'view/_templates/footer.php';     
         }
     }
+
+    public function logout(){
+        session_unset();
+        session_destroy();
+
+        header('Location: ' . URL . 'posts');
+        die();
+    }
 }
