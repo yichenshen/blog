@@ -21,4 +21,18 @@ class Error extends Controller
         require APP . 'view/error/index.php';
         require APP . 'view/_templates/footer.php';
     }
+
+    /**
+     * PAGE: unauthorized
+     * This method handles the error page for unauthorized access.
+     */
+    public function unauthorized(){
+        if(isset($_SESSION['user'])){
+            header('Location: ' . URL);
+        } else{
+            require APP . 'view/_templates/header.php';
+            require APP . 'view/error/unauthorized.php';
+            require APP . 'view/_templates/footer.php';   
+        }
+    }
 }
