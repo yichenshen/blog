@@ -17,9 +17,13 @@ class Login extends Controller {
     }
 
     public function index(){
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/login/index.php';
-        require APP . 'view/_templates/footer.php';  	
+        if(isset($_SESSION['user'])){
+            header("Location: ". URL . "posts/admin/1");
+        } else { //Only render if not logged in
+            require APP . 'view/_templates/header.php';
+            require APP . 'view/login/index.php';
+            require APP . 'view/_templates/footer.php';  	
+        }
     }
 
     public function auth(){
@@ -27,7 +31,8 @@ class Login extends Controller {
         $pass = $_POST["password"];
 
         if($this->model->authenticate($user, $pass)){
-
+            $_SESSION['user'] = $user;
+            header("Location: ". URL . "posts/admin/1");
         } else{
             $error = "Invalid Username and/or Password!";
 

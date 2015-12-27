@@ -18,6 +18,8 @@ class Controller
     function __construct()
     {
         $this->openDatabaseConnection();
+        //Start session
+        session_start();
     }
 
     /**

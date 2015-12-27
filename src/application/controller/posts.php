@@ -51,11 +51,13 @@ class Posts extends Controller {
      * @param   int     $page   The page number to display
      */
     public function admin($page) {
-        $posts = $this->model->all();
-        
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/posts/admin.php';
-        require APP . 'view/_templates/footer.php';   
+        if(isset($_SESSION['user'])){
+            $posts = $this->model->all();
+            
+            require APP . 'view/_templates/header.php';
+            require APP . 'view/posts/admin.php';
+            require APP . 'view/_templates/footer.php';   
+        }
     }
 
     /**
@@ -83,9 +85,11 @@ class Posts extends Controller {
      * Requires login.
      */
     public function newpost(){
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/posts/new.php';
-        require APP . 'view/_templates/footer.php';  
+        if(isset($_SESSION['user'])){
+            require APP . 'view/_templates/header.php';
+            require APP . 'view/posts/new.php';
+            require APP . 'view/_templates/footer.php';  
+        }
     }
 
     /**
@@ -97,12 +101,14 @@ class Posts extends Controller {
      * Requires login.
      */
     public function create(){
-        $title = $_POST['title'];
-        $content = $_POST['content'];
+        if(isset($_SESSION['user'])){
+            $title = $_POST['title'];
+            $content = $_POST['content'];
 
-        $this->model->create($title, $content);
+            $this->model->create($title, $content);
 
-        header("Location: ". URL . "posts");
+            header("Location: ". URL . "posts");
+        }
     }
 
     /**
@@ -114,11 +120,13 @@ class Posts extends Controller {
      * @param   int     $id     The ID of the post to edit.
      */
     public function edit($id){
-        $post = $this->model->get($id);
+        if(isset($_SESSION['user'])){
+            $post = $this->model->get($id);
 
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/posts/edit.php';
-        require APP . 'view/_templates/footer.php';  
+            require APP . 'view/_templates/header.php';
+            require APP . 'view/posts/edit.php';
+            require APP . 'view/_templates/footer.php';  
+        }
     }
 
     /**
@@ -130,12 +138,14 @@ class Posts extends Controller {
      * @param   int     $id     The ID of the post to edit.
      */
     public function update($id){
-        $title = $_POST['title'];
-        $content = $_POST['content'];
+        if(isset($_SESSION['user'])){
+            $title = $_POST['title'];
+            $content = $_POST['content'];
 
-        $this->model->edit($id, $title, $content);
+            $this->model->edit($id, $title, $content);
 
-        header("Location: ". URL . "posts/show/" . $id);
+            header("Location: ". URL . "posts/show/" . $id);
+        }
     }
 
     /**
@@ -147,8 +157,10 @@ class Posts extends Controller {
      * @param   int     $id     The ID of the post to delete.
      */
     public function delete($id){
-        $this->model->delete($id);
+        if(isset($_SESSION['user'])){
+            $this->model->delete($id);
 
-        header("Location: " . URL . "posts/");
+            header("Location: " . URL . "posts/");
+        }
     }
 }
