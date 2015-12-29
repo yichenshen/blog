@@ -43,7 +43,11 @@ class Posts extends Controller {
      * @param   int     $page   The page number to display
      */
     public function page($page) {
+        $page = (int) $page;
+        $total_pages = (int) ceil($this->model->count() / $this->page_count);
+
         $posts = $this->model->list_paged($page, $this->page_count);
+
 
         require APP . 'view/_templates/header.php';
         require APP . 'view/posts/index.php';
