@@ -38,6 +38,18 @@ class Post extends Model{
     }
 
     /**
+     * Gives the total number of posts in the databsae.
+     */
+    function count(){
+        $sql = "SELECT count(*) FROM post";
+        $query = $this->db->prepare($sql);
+
+        $query->execute();
+
+        return $query->fetchColumn();
+    }
+
+    /**
      * Creates a new blog post in the database, together with content.
      * 
      * The author of the post is assigned based on login.
