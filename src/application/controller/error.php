@@ -35,4 +35,15 @@ class Error extends Controller
             require APP . 'view/_templates/footer.php';   
         }
     }
+
+    /**
+     * PAGE: Owner permission eror
+     * This method handles the error page whereby an user tries to modify content that's not his.
+     */
+    public function owner(){
+
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/error/owner.php';
+        require APP . 'view/_templates/footer.php';   
+    }
 }

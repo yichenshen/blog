@@ -34,6 +34,16 @@ class Post extends Model{
     	return $query->fetch();
     }
 
+    function getUser($id){
+        $sql  = "SELECT user_username FROM post WHERE post_id = :id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':id' => $id);
+
+        $query->execute($parameters);
+
+        return $query->fetch()->user_username;
+    }
+
     /**
      * Creates a new blog post in the database, together with content.
      * 
@@ -42,10 +52,10 @@ class Post extends Model{
      * @param	string	$title		The title of the blog post
      * @param	string	$content	The content of the blog post 
      */
-    function create($title, $content){
+    function create($title, $content, $author){
 		$sql = "INSERT INTO post (title, content, user_username) VALUES (:title, :content, :author)";
         $query = $this->db->prepare($sql);
-        $parameters = array(':title' => $title, ':content' => $content, ':author' => "admin"); //TODO: replace with loggedInUser
+        $parameters = array(':title' => $title, ':content' => $content, ':author' => $author); //TODO: replace with loggedInUser
     
     	$query->execute($parameters);
     }

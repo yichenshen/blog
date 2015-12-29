@@ -109,7 +109,7 @@ class Posts extends Controller {
             $title = $_POST['title'];
             $content = $_POST['content'];
 
-            $this->model->create($title, $content);
+            $this->model->create($title, $content, $_SESSION['user']);
 
             header("Location: ". URL . "posts");
         } else{
@@ -126,12 +126,18 @@ class Posts extends Controller {
      * @param   int     $id     The ID of the post to edit.
      */
     public function edit($id){
+        
         if(isset($_SESSION['user'])){
             $post = $this->model->get($id);
 
-            require APP . 'view/_templates/header.php';
-            require APP . 'view/posts/edit.php';
-            require APP . 'view/_templates/footer.php';  
+            if($_SESSION['user'] === $post->user_username){
+                require APP . 'view/_templates/header.php';
+                require APP . 'view/posts/edit.php';
+                require APP . 'view/_templates/footer.php';  
+            } else{
+                header('Location: ' . URL . 'error/owner');
+                die();
+            }
         } else{
             header('Location: ' . URL . 'error/unauthorized');
         }
@@ -147,12 +153,17 @@ class Posts extends Controller {
      */
     public function update($id){
         if(isset($_SESSION['user'])){
-            $title = $_POST['title'];
-            $content = $_POST['content'];
+            if($_SESSION['user'] === $this->model->getUser()){
+                $title = $_POST['title'];
+                $content = $_POST['content'];
 
-            $this->model->edit($id, $title, $content);
+                $this->model->edit($id, $title, $content);
 
-            header("Location: ". URL . "posts/show/" . $id);
+                header("Location: ". URL . "posts/show/" . $id);
+            } else{
+                header('Location: ' . URL . 'error/owner');
+                die();
+            }
         } else{
             header('Location: ' . URL . 'error/unauthorized');
         }
@@ -168,9 +179,14 @@ class Posts extends Controller {
      */
     public function delete($id){
         if(isset($_SESSION['user'])){
-            $this->model->delete($id);
+            if($_SESSION['user'] === $this->model->getUser()){
+                $this->model->delete($id);
 
-            header("Location: " . URL . "posts/");
+                header("Location: " . URL . "posts/");
+            } else{
+                header('Location: ' . URL . 'error/owner');
+                die();
+            }
         } else{
             header('Location: ' . URL . 'error/unauthorized');
         }
