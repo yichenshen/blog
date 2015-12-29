@@ -10,6 +10,12 @@
 				<?php echo $post->create_time; ?>
 			</small>
 		</h4>
+		<h4>
+			<small>
+				By
+				<?php echo $post->user_username ?>
+			</small>
+		</h4>
 	</p>
 	<br /> 
 	<p>

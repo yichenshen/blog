@@ -10,7 +10,8 @@
         <th>Date</th>
         <th>Title</th>
         <th>Text</th>
-        <th colspan="3">
+        <th>Author</th>
+        <th>
           <a href = "<?php echo URL ?>posts/newpost" class = "btn btn-primary pull-right">New Article</a>
         </th>
       </tr>
@@ -22,10 +23,13 @@
                     <?php echo date("d M  Y", strtotime($post->create_time)); ?>
                 </td>
                 <td>
-                    <?php echo $post->title ?>
+                    <?php echo $post->title; ?>
                 </td>
                 <td>
-                    <?php echo substr($post->content,0,20) ?>
+                    <?php echo substr($post->content,0,20); ?>
+                </td>
+                <td>
+                    <?php echo $post->user_username; ?>
                 </td>
                 <td>
                     <div class="pull-right">
