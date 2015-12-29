@@ -20,7 +20,7 @@
 <br />
 <div class="container">
 	<div class = "pull-right">
-	<?php if(isset($_SESSION['user'])): ?>
+	<?php if(isset($_SESSION['user']) && $post->user_username === $_SESSION['user']): ?>
 		<a href="<?php echo URL . "posts/edit/" . $post->post_id; ?>">Edit</a>
 		|
 	<?php endif; ?>
