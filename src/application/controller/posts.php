@@ -20,6 +20,8 @@ class Posts extends Controller {
      */
     private $admin_page_count = 20;
 
+    private $admin_pagination_preview = 2;
+
     function __construct (){
         parent::__construct();
         require_once APP . 'model/post.php';
@@ -64,6 +66,39 @@ class Posts extends Controller {
      */
     public function admin($page) {
         if(isset($_SESSION['user'])){
+
+            $page = (int) $page;
+            $total_pages = (int) ceil($this->model->count() / $this->admin_page_count);
+
+            //We set an array of pagination indices, with -1 as ellipsis
+            //We can ignore empty cases or invalid indices, since the entire pagination bar will be hidden
+            $indices = array();
+
+            //First index
+            array_push($indices, 1);
+            
+            //Ellipsis if page number is larger enough
+            if($page > $this->admin_pagination_preview + 2){
+                array_push($indices, -1);
+            }
+
+            //Previews before and after the page number
+            for ($i = $page - $this->admin_pagination_preview; $i <= $page + $this->admin_pagination_preview; $i++) { 
+                if($i > 1 && $i < $total_pages){
+                    array_push($indices, $i);
+                }
+            }
+
+            //Ellipsis if page number is small enough
+            if($page + $this->admin_pagination_preview < $total_pages - 1){
+                array_push($indices, -1);
+            }
+
+            //Last page
+            if($total_pages > 1){
+                array_push($indices, $total_pages);
+            }
+
             $posts = $this->model->list_paged($page, $this->admin_page_count);
             
             require APP . 'view/_templates/header.php';
