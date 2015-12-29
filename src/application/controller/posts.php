@@ -10,6 +10,16 @@
  */
 class Posts extends Controller {
 
+    /**
+     * The number of posts to show on one page in the vistor view.
+     */
+    private $page_count = 10;
+
+    /**
+     * The number of posts to show in the admin page.
+     */
+    private $admin_page_count = 20;
+
     function __construct (){
         parent::__construct();
         require_once APP . 'model/post.php';
@@ -24,8 +34,6 @@ class Posts extends Controller {
         $this->page(1);
     }
 
-    //TODO add paging
-
     /**
      * PAGE: posts display page
      * Display a page of blog posts.
@@ -35,7 +43,7 @@ class Posts extends Controller {
      * @param   int     $page   The page number to display
      */
     public function page($page) {
-        $posts = $this->model->all();
+        $posts = $this->model->list_paged($page, $this->page_count);
 
         require APP . 'view/_templates/header.php';
         require APP . 'view/posts/index.php';
@@ -52,7 +60,7 @@ class Posts extends Controller {
      */
     public function admin($page) {
         if(isset($_SESSION['user'])){
-            $posts = $this->model->all();
+            $posts = $this->model->list_paged($page, $this->admin_page_count);
             
             require APP . 'view/_templates/header.php';
             require APP . 'view/posts/admin.php';
