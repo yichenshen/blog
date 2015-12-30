@@ -20,6 +20,9 @@ class Posts extends Controller {
      */
     private $admin_page_count = 20;
 
+    /**
+     * The number of pages in the pagination bar shown before and after the current page.
+     */
     private $admin_pagination_preview = 2;
 
     function __construct (){
@@ -48,12 +51,17 @@ class Posts extends Controller {
         $page = (int) $page;
         $total_pages = (int) ceil($this->model->count() / $this->page_count);
 
-        $posts = $this->model->list_paged($page, $this->page_count);
+        if($page < 1 || $page > $total_pages){
+            header('Location: ' . URL . 'error');
+        }else{
+
+            $posts = $this->model->list_paged($page, $this->page_count);
 
 
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/posts/index.php';
-        require APP . 'view/_templates/footer.php';
+            require APP . 'view/_templates/header.php';
+            require APP . 'view/posts/index.php';
+            require APP . 'view/_templates/footer.php';
+        }
     }
 
     /**
@@ -70,40 +78,44 @@ class Posts extends Controller {
             $page = (int) $page;
             $total_pages = (int) ceil($this->model->count() / $this->admin_page_count);
 
-            //We set an array of pagination indices, with -1 as ellipsis
-            //We can ignore empty cases or invalid indices, since the entire pagination bar will be hidden
-            $indices = array();
+            if($page < 1 || $page > $total_pages){
+                header('Location: ' . URL . 'error');
+            } else{
 
-            //First index
-            array_push($indices, 1);
-            
-            //Ellipsis if page number is larger enough
-            if($page > $this->admin_pagination_preview + 2){
-                array_push($indices, -1);
-            }
+                //We set an array of pagination indices, with -1 as ellipsis
+                $indices = array();
 
-            //Previews before and after the page number
-            for ($i = $page - $this->admin_pagination_preview; $i <= $page + $this->admin_pagination_preview; $i++) { 
-                if($i > 1 && $i < $total_pages){
-                    array_push($indices, $i);
+                //First index
+                array_push($indices, 1);
+                
+                //Ellipsis if page number is larger enough
+                if($page > $this->admin_pagination_preview + 2){
+                    array_push($indices, -1);
                 }
-            }
 
-            //Ellipsis if page number is small enough
-            if($page + $this->admin_pagination_preview < $total_pages - 1){
-                array_push($indices, -1);
-            }
+                //Previews before and after the page number
+                for ($i = $page - $this->admin_pagination_preview; $i <= $page + $this->admin_pagination_preview; $i++) { 
+                    if($i > 1 && $i < $total_pages){
+                        array_push($indices, $i);
+                    }
+                }
 
-            //Last page
-            if($total_pages > 1){
-                array_push($indices, $total_pages);
-            }
+                //Ellipsis if page number is small enough
+                if($page + $this->admin_pagination_preview < $total_pages - 1){
+                    array_push($indices, -1);
+                }
 
-            $posts = $this->model->list_paged($page, $this->admin_page_count);
-            
-            require APP . 'view/_templates/header.php';
-            require APP . 'view/posts/admin.php';
-            require APP . 'view/_templates/footer.php';   
+                //Last page
+                if($total_pages > 1){
+                    array_push($indices, $total_pages);
+                }
+
+                $posts = $this->model->list_paged($page, $this->admin_page_count);
+                
+                require APP . 'view/_templates/header.php';
+                require APP . 'view/posts/admin.php';
+                require APP . 'view/_templates/footer.php';
+            }   
         } else{
             header('Location: ' . URL . 'error/unauthorized');
         }
