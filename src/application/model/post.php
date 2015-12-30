@@ -9,10 +9,13 @@
 class Post extends Model{
 	
 	/**
-	 * Returns all the posts objects
-	 */
-	function all() {
-        $sql = "SELECT * FROM post ORDER BY create_time DESC";
+	 * Returns posts objects for the given page
+	 *
+     * @param   int     $page       The page number
+     * @param   int     $page_count The number of posts on each page.
+     */
+	function list_paged($page, $page_count) {
+        $sql = 'SELECT * FROM post ORDER BY create_time DESC LIMIT ' . $page_count . ' OFFSET ' . $page_count * ($page-1);
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -42,6 +45,18 @@ class Post extends Model{
         $query->execute($parameters);
 
         return $query->fetch()->user_username;
+    }
+
+    /**
+     * Gives the total number of posts in the databsae.
+     */
+    function count(){
+        $sql = "SELECT count(*) FROM post";
+        $query = $this->db->prepare($sql);
+
+        $query->execute();
+
+        return $query->fetchColumn();
     }
 
     /**
