@@ -27,8 +27,12 @@ class Posts extends Controller {
 
     function __construct (){
         parent::__construct();
+        
         require_once APP . 'model/post.php';
         $this->model = new Post($this->db);
+
+        require_once APP . 'model/comment.php';
+        $this->comments = new Comment($this->db);
     }
 
     /**
@@ -133,6 +137,7 @@ class Posts extends Controller {
      */
     public function show($id){
         $post = $this->model->get($id);
+        $comments = $this->comments->forPost($id);
 
         require APP . 'view/_templates/header.php';
         require APP . 'view/posts/show.php';
