@@ -26,6 +26,22 @@ class Comment extends Model{
 	}
 
 	/**
+	 * Gets the user for the comment.
+	 *
+	 * @param 	int 	$id		The ID of the comment.
+	 */
+	function getUser($id){
+		$sql  = "SELECT user_username FROM comment WHERE comments_id = :id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':id' => $id);
+
+        $query->execute($parameters);
+
+        return $query->fetch()->user_username;
+
+	}
+
+	/**
 	 * Creates a new comment for a certain post.
 	 *
 	 * If a username is provided, the comment will be linked to a certain user. The user may then edit or delete the comment.
