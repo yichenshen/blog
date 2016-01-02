@@ -1,39 +1,41 @@
 $(function() {
 
-    // just a super-simple JS demo
+    //If the example modal is present, configure it to load
+    if ($('#commentBox').length !== 0) {
+        $('#commentBox').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var type = button.data('type');
 
-    var demoHeaderBox;
+            var modal = $(this);
 
-    // simple demo to show create something via javascript on the page
-    if ($('#javascript-header-demo-box').length !== 0) {
-    	demoHeaderBox = $('#javascript-header-demo-box');
-    	demoHeaderBox
-    		.hide()
-    		.text('Hello from JavaScript! This line has been added by public/js/application.js')
-    		.css('color', 'green')
-    		.fadeIn('slow');
-    }
+            //Get post ID for action links
+            var postID = button.data('postid');
 
-    // if #javascript-ajax-button exists
-    if ($('#javascript-ajax-button').length !== 0) {
+            //For new, we have to restore the modal!
+            if(type === 'new'){
+                modal.find('.modal-title').text('New Comment');
 
-        $('#javascript-ajax-button').on('click', function(){
+                
+                modal.find('#authorField').val('');
+                modal.find('#contentField').text('');
+                modal.find('form').attr('action', url + 'comments/create/' + postID);
+            } else if(type === 'edit'){
+                modal.find('.modal-title').text('Edit Comment');
 
-            // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
-            // "url" is defined in views/_templates/footer.php
-            $.ajax(url + "/songs/ajaxGetStats")
-                .done(function(result) {
-                    // this will be executed if the ajax-call was successful
-                    // here we get the feedback from the ajax-call (result) and show it in #javascript-ajax-result-box
-                    $('#javascript-ajax-result-box').html(result);
-                })
-                .fail(function() {
-                    // this will be executed if the ajax-call had failed
-                })
-                .always(function() {
-                    // this will ALWAYS be executed, regardless if the ajax-call was success or not
-                });
+                var box = button.parent().parent();
+
+                //Load original content
+                var author = box.find('.comment-author').text().trim();
+                var content = box.find('.comment-content').text().trim();
+
+                //Load information to determine action path
+                var commentID = button.data('commentid'); 
+
+                //Modify modal
+                modal.find('#authorField').val(author);
+                modal.find('#contentField').text(content);
+                modal.find('form').attr('action', url + 'comments/edit/' + postID + '/' + commentID);
+            }
         });
     }
-
 });
