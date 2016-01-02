@@ -16,8 +16,9 @@
 	    		<form action="<?php echo URL . 'comments/create/' . $post->post_id; ?>" method="post">
 		     		<div class="modal-body">
 		       			<div class="form-group">
-		       				<label for="title" class="sr-only">Name ('Anonymous' if blank)</label>
-					    	<input type="text" name="name" class="form-control" placeholder="Name ('Anonymous' if blank)" />
+		       				<?php $default_name = isset($_SESSION['user']) ? $_SESSION['user'] : 'Anonymous'; ?> 
+		       				<label for="title" class="sr-only">Name ('<?php echo $default_name; ?>' if blank)</label>
+					    	<input type="text" name="name" class="form-control" placeholder="Name ('<?php echo $default_name; ?>' if blank)" />
 		       			</div>
 		       			<div class="form-group">
 		       				<label for="content" class="sr-only">Comment</label>
@@ -38,6 +39,26 @@
 
 	<?php foreach($comments as $comment): ?>
 		<div class="well">
+			<?php if(isset($_SESSION['user']) && $_SESSION['user'] === $comment->user_username): ?>
+				<div class="pull-right">
+					<a data-toggle="modal" href="#commentBox">
+						<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        <span class="sr-only">Edit</span>	
+					</a>
+					|
+					<form 	action = "<?php echo URL . 'comments/delete/' . $comment->post_id . '/' . $comment->comments_id; ?>" 
+							method = "POST"
+							style = "display:inline;">
+
+					    <!-- Confirm delete dialog -->
+					    <a  href = "#" 
+					        onclick="if(confirm(&quot;Are you sure you want to delete this post?&quot;)) this.parentNode.submit()">
+					        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					        <span class="sr-only">Delete</span>
+					    </a>
+					</form>
+				</div>
+			<?php endif; ?>
 			<p>
 				<strong><?php if (isset($comment->author_name)) echo htmlspecialchars($comment->author_name, ENT_QUOTES, 'UTF-8'); ?></strong>
 			</p>

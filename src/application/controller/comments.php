@@ -27,12 +27,20 @@ class Comments extends Controller {
 
     	//Check for empty author
     	if($author === ''){
-    		$author = 'Anonymous';
+            if(isset($_SESSION['user'])){
+                $author = $_SESSION['user'];
+            } else{
+        		$author = 'Anonymous';
+            }
     	}
 
     	$content = $_POST['content'];
 
-    	$this->model->create($author, $content, $id);
+        if(isset($_SESSION['user'])){
+            $this->model->create($author, $content, $id, $_SESSION['user']);
+        } else{
+        	$this->model->create($author, $content, $id);
+        }
 
     	header('Location: ' . URL . 'posts/show/' . $id);
     }
@@ -83,7 +91,6 @@ class Comments extends Controller {
     function delete($post_id, $comment_id){
         if(isset($_SESSION['user'])){
             if($_SESSION['user'] === $this->model->getUser($comment_id)){
-                $
                 $this->model->delete($comment_id);
 
                 header('Location: ' . URL . 'posts/show/' . $post_id);
