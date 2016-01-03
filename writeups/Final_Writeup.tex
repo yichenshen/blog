@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{sectsty}
+\usepackage[a4paper,left=2.5cm,top=2cm,right=2.5cm,bottom=2cm,bindingoffset=0.5cm]{geometry}
+
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.2}
+
+\allsectionsfont{\normalfont\sffamily\bfseries}
+\lstset{breaklines=true,
+        basicstyle={\small\ttfamily}}
+
+\title{\textbf{\textsf{CVWO Assignment 1 Final Writeup}}}
+\date{}
+\author{\textsf{Shen Yichen}}
+
+\begin{document}
+\maketitle
+
+\section*{Accomplishments}
+
+In this assignment, I've attempted to create a simple blog application on a LAMP stack. The backup was done using MINI, a simple PHP framework, with a MySQL database to store the posts, users and comments. The front-end was put together with Bootstrap.
+
+Prior to the assignment, I have some knowledge of PHP, as well as MySQL\@. I learnt MySQL back in NUS High School as part of the computing course. I learnt PHP myself when I took IS1103FC as an iBloc module. I made a pseudo-website in that module, where the website was rendered with PHP, but the content was static, and was directly hardcoded into the models. This assignment pushed that boundary a little further, by connecting the back-end to the front-end. In the process, I came to appreciate
+the details involved when different parts of a system interact.
+
+The assignment also allowed me to refresh and expand upon my web development skills. It also serves as good practice too, since my experience with web applications is not too rich either.
+
+Finally, I was once again reminded of how long a project might end up needing. Initially, I was able to visualize how the back-end will turn out, and thought it will be done quite quickly. However, as the code develops, I found myself having to make modifications for unseen circumstances (The user permissions for example caused some problems, since certain controller functions that did not require a select query now needs it for user verification). The front-end also took quite a while,
+for I tend to be indecisive when it comes to design. Thus, I found time-management to be crucial for such a project.
+
+\section*{Manual}
+
+\subsection*{Visitor}
+
+\subsubsection*{Posts}
+
+A visitor lands on the post list page. He will see posts in reverse chronological order, each with its title, post content and some meta-data. Clicking on the post title will bring the user to the post page, where the comments can be seen. Each page can have a maximum of 10 posts. As the user reaches the end of the post, he can use the pager buttons at the bottom to see older or newer posts.
+
+\subsubsection*{Comments}
+
+A visitor may comment on any post from the post show page, by clicking on the new comment button. A modal will then show with a form, asking for a name and the comment itself. If the name is left blank, `Anonymous' will be used instead. The comment will then be displayed on the show page, at the top, since it is usually in reverse chronological order.
+
+\subsection*{Writer}
+
+A writer can do all that a visitor could do too. They have access to additional functions too. Clicking on the \texttt{Log out} button on the navbar will log the writer out.
+
+\subsubsection*{Login}
+
+A writer may click on the \texttt{Log in} button on the navbar to log in with their user and password. They may access writer specific functions after that.
+
+\subsubsection*{Admin}
+
+Writers have access to a special admin page, accessible from the dashboard button on the navbar after log in. On this page, the posts are shown in tabular form, paginated with maximum of 20 posts a page. If the post belongs to the user, he would see 3 buttons to the right, where he could edit or delete the post. A button at the top of the table brings the writer to a page with a form, where he can enter a title and the post content to create a new post.
+
+The same form is used for edit.
+
+The delete button will open a confirmation dialogue, which deletes the post upon confirmation.
+
+\subsubsection*{Comments}
+
+When a writer comments, the comment will be linked to his account. He will be able to edit and delete his own comments. Leaving the name field blank for a comment will cause it to default to the writer's username instead of `Anonymous'.
+
+\end{document}

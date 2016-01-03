@@ -1,1 +1,5 @@
 writeups/*.docx
+writeups/*.aux
+writeups/*.log
+writeups/*.synctex.gz
+
