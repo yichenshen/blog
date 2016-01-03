@@ -217,7 +217,7 @@ class Posts extends Controller {
      */
     public function update($id){
         if(isset($_SESSION['user'])){
-            if($_SESSION['user'] === $this->model->getUser()){
+            if($_SESSION['user'] === $this->model->getUser($id)){
                 $title = $_POST['title'];
                 $content = $_POST['content'];
 
@@ -243,10 +243,10 @@ class Posts extends Controller {
      */
     public function delete($id){
         if(isset($_SESSION['user'])){
-            if($_SESSION['user'] === $this->model->getUser()){
+            if($_SESSION['user'] === $this->model->getUser($id)){
                 $this->model->delete($id);
 
-                header("Location: " . URL . "posts/");
+                header("Location: " . URL . "posts/admin/1");
             } else{
                 header('Location: ' . URL . 'error/owner');
                 die();
