@@ -2,17 +2,18 @@
 <div class="container">
 	<h1>New Article</h1>
 
+	<?php require APP . 'view/_templates/errorbox.php'; ?>
 
 	<form action = "<?php echo URL; ?>posts/create" method = "post">
 
 	    <div class="form-group">
 	    	<label for="title" class="sr-only">Title</label>
-	    	<input type="text" name="title" class="form-control" placeholder="Title" />
+	    	<input type="text" name="title" class="form-control" placeholder="Title" required/>
 	    </div>
 	   
 	    <div class="form-group">
 	    	<label for="content" class="sr-only">Text</label>
-	    	<textarea name="content" class="form-control" rows = "20" placeholder="Text"></textarea>
+	    	<textarea name="content" class="form-control" rows = "20" placeholder="Text" required></textarea>
 	    </div>
 	   
 	   	<input type="submit" class="btn btn-primary">

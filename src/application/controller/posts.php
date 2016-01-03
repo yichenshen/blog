@@ -173,9 +173,17 @@ class Posts extends Controller {
             $title = $_POST['title'];
             $content = $_POST['content'];
 
-            $this->model->create($title, $content, $_SESSION['user']);
+            if($title === '' || $content === '' || $title === null || $content === null){
+                $error = 'Invalid input! Make sure fields are filled!';
 
-            header("Location: ". URL . "posts");
+                require APP . 'view/_templates/header.php';
+                require APP . 'view/posts/new.php';
+                require APP . 'view/_templates/footer.php'; 
+            } else {
+                $this->model->create($title, $content, $_SESSION['user']);
+
+                header("Location: ". URL . "posts");
+            }
         } else{
             header('Location: ' . URL . 'error/unauthorized');
         }
@@ -218,12 +226,25 @@ class Posts extends Controller {
     public function update($id){
         if(isset($_SESSION['user'])){
             if($_SESSION['user'] === $this->model->getUser($id)){
+
                 $title = $_POST['title'];
                 $content = $_POST['content'];
 
-                $this->model->edit($id, $title, $content);
+                if($title === '' || $content === '' || $title === null || $content === null){
+                    $error = 'Invalid input! Make sure fields are filled!';
 
-                header("Location: ". URL . "posts/show/" . $id);
+                    $post = (object) array('title' => $title, 'content' => $content, 'post_id' => $id);
+
+                    require APP . 'view/_templates/header.php';
+                    require APP . 'view/posts/edit.php';
+                    require APP . 'view/_templates/footer.php'; 
+                } else {
+
+
+                    $this->model->edit($id, $title, $content);
+
+                    header("Location: ". URL . "posts/show/" . $id);
+                }
             } else{
                 header('Location: ' . URL . 'error/owner');
                 die();
