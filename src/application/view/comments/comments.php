@@ -66,7 +66,7 @@
 	       			</div>
 	       			<div class="form-group">
 	       				<label for="content" class="sr-only">Comment</label>
-				    	<textarea id='contentField' name="content" class="form-control" rows = "10" placeholder="Comment"></textarea>
+				    	<textarea id='contentField' name="content" class="form-control" rows = "10" placeholder="Comment" required></textarea>
 	       			</div>
 	    		</div>
 	    		
