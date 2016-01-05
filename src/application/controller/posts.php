@@ -175,10 +175,14 @@ class Posts extends Controller {
 
             if($title === '' || $content === '' || $title === null || $content === null){
                 $error = 'Invalid input! Make sure fields are filled!';
+            } elseif (strlen($title) > 250) {
+                $error = 'Invalid input! Title is too long!';
+            }
 
+            if(isset($error)){
                 require APP . 'view/_templates/header.php';
                 require APP . 'view/posts/new.php';
-                require APP . 'view/_templates/footer.php'; 
+                require APP . 'view/_templates/footer.php';
             } else {
                 $this->model->create($title, $content, $_SESSION['user']);
 
@@ -233,8 +237,13 @@ class Posts extends Controller {
                 if($title === '' || $content === '' || $title === null || $content === null){
                     $error = 'Invalid input! Make sure fields are filled!';
 
-                    $post = (object) array('title' => $title, 'content' => $content, 'post_id' => $id);
+                } elseif (strlen($title) > 250) {
+                    $error = 'Invalid input! Title is too long!';
+                }
 
+                if(isset($error)){
+                    $post = (object) array('title' => $title, 'content' => $content, 'post_id' => $id);
+                    
                     require APP . 'view/_templates/header.php';
                     require APP . 'view/posts/edit.php';
                     require APP . 'view/_templates/footer.php'; 

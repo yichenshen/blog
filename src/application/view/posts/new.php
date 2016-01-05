@@ -8,7 +8,7 @@
 
 	    <div class="form-group">
 	    	<label for="title" class="sr-only">Title</label>
-	    	<input type="text" name="title" class="form-control" placeholder="Title" required/>
+	    	<input type="text" name="title" class="form-control" placeholder="Title" maxlength=250 required/>
 	    </div>
 	   
 	    <div class="form-group">

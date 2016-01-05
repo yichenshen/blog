@@ -62,11 +62,11 @@
 	       			<div class="form-group">
 	       				<?php $default_name = isset($_SESSION['user']) ? $_SESSION['user'] : 'Anonymous'; ?> 
 	       				<label for="title" class="sr-only">Name ('<?php echo $default_name; ?>' if blank)</label>
-				    	<input id='authorField' type="text" name="name" class="form-control" placeholder="Name ('<?php echo $default_name; ?>' if blank)" />
+				    	<input id='authorField' type="text" name="name" class="form-control" placeholder="Name ('<?php echo $default_name; ?>' if blank)" maxlength=60 />
 	       			</div>
 	       			<div class="form-group">
 	       				<label for="content" class="sr-only">Comment</label>
-				    	<textarea id='contentField' name="content" class="form-control" rows = "10" placeholder="Comment" required></textarea>
+				    	<textarea id='contentField' name="content" class="form-control" rows = "10" placeholder="Comment" maxlength=4000 required></textarea>
 	       			</div>
 	    		</div>
 	    		
